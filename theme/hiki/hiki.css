@@ -81,7 +81,7 @@ span.adminmenu {
 }
 
 h1 {
-	height: 64px;
+	/* height: 64px; */
 	line-height: 64px;
 	text-align: right;
 	padding-bottom: 5px;
@@ -466,15 +466,20 @@ div.section {
 	clear: both;
 }
 
-div.main {
-	margin-left: 20%;
+@media screen and (min-width: 600px) {
+	div.main {
+		margin-left: 20%;
+	}
+
+	div.sidebar {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 20%;
+	}
 }
 
 div.sidebar {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 20%;
 	font-size: 75%;
 	padding: 2px 2px 100% 2px;
 	border-style: solid;
@@ -639,7 +644,18 @@ div.comment form {
 }
 
 @media screen {
-	div.main { margin-left: 20%;}
+	@media screen and (min-width: 600px) {
+		div.main { margin-left: 20%;}
+	}
+	@media screen and (max-width: 600px) {
+		div.main { margin-left: 0%;}
+		img {
+			max-width: 100%;
+		}
+		div.main ul {
+			padding-left: 0%;
+		}
+	}
 	div.adminmenu { display: block;	}
 	div.sidebar { display: block; }
 	div.comment { display: block; }
