@@ -302,6 +302,21 @@ module Hiki
       [list, last_modified]
     end
 
+    def get_page_revision(page, revision)
+      text = @conf.repos.get_revision(page, revision)
+      case @conf.repos_type
+      when 'svn', 'cvs'
+        old_revision = @conf.options['repos.old_revision']
+        old_charset = @conf.options['repos.old_charset']
+        if old_revision
+          if revision.to_i <= old_revision.to_i
+            text.encode!("UTF-8", old_charset, :invalid => :replace, :undef => :replace) if old_charset
+          end
+        end
+      end
+      text
+    end
+
     def cmd_edit( page, text=nil, msg=nil, d_title=nil )
       page_title = d_title ? h(d_title) : @plugin.page_name(page)
 
@@ -335,7 +350,7 @@ module Hiki
       @cmd = 'edit'
 
       if rev = @request.params['r']
-        text = @conf.repos.get_revision(page, rev.to_i)
+        text = get_page_revision(page, rev)
         raise 'No such revision.' if text.empty?
       else
         text = ( @db.load( page ) || '' ) unless text
