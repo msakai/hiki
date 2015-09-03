@@ -211,7 +211,7 @@ module Hiki
     def history_src
       # make command string
       r = @request.params['r'] || '1'
-      txt = @conf.repos.get_revision(@p, r)
+      txt = get_page_revision(@p, r)
       txt = "*** no source ***" if txt.empty?
 
       # construct output sources
@@ -237,10 +237,10 @@ module Hiki
       r2 = @request.params['r2']
       if r2.nil? || r2.to_i == 0
         new = @db.load(@p)
-        old = @conf.repos.get_revision(@p, r)
+        old = get_page_revision(@p, r)
       else
-        new = @conf.repos.get_revision(@p, r2)
-        old = @conf.repos.get_revision(@p, r)
+        new = get_page_revision(@p, r2)
+        old = get_page_revision(@p, r)
       end
 
       # parse the result and make revisions array
