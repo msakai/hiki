@@ -106,6 +106,6 @@ def sakai_google_custom_search
     <input type="submit" name="sa" value="検索" />
   </div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=ja"></script>
+<script type="text/javascript" src="//www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=ja"></script>
 END
 end
